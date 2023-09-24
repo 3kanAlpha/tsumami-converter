@@ -19,7 +19,7 @@ mouse_controller = Controller()
 # マウスイベントを処理する関数
 def on_move(x, y):
     global prev_x, prev_y
-    print(f'x: {x}, y: {y}')
+    # print(f'x: {x}, y: {y}')
     
     diff_x = x - prev_x
     diff_y = y - prev_y
@@ -48,19 +48,21 @@ def main():
     time.sleep(5)
     
     print("start mouse listener")
+    print("press q to exit")
 
     # マウスリスナーを作成
     mouse_listener = Listener(on_move=on_move)
     mouse_listener.start()
 
     def on_press(key):
-        print(f'押されたキー: {key}')
+        # print(f'押されたキー: {key}')
         
         # 特殊なキーが押された場合にエラーが発生するので例外処理
         try:
             # 押されたキーが q なら...
             if key.char == 'q':
                 # リスナーを停止する
+                print("exiting...")
                 mouse_listener.stop()
                 return False
         except:
