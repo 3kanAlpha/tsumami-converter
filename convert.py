@@ -4,7 +4,8 @@ from pynput.keyboard import Listener as KeyboardListener
 
 import time, threading
 
-TRACK_PER_SECOND = 20
+# 1秒に何回マウス移動の追跡を行うか 30は仮
+TRACK_PER_SECOND = 30
 ONE_FRAME_TIME = 1 / TRACK_PER_SECOND
 TSUMAMI_L_LEFT = 's'
 TSUMAMI_L_RIGHT = 'a'
@@ -58,15 +59,13 @@ def track_mouse():
 
 mouse_tracker = threading.Thread(target=track_mouse, daemon=True)
 
+# キー入力監視
 def on_press(key):
     global listener_enabled, mouse_fix_position
-    # print(f'押されたキー: {key}')
     
     # 特殊なキーが押された場合にエラーが発生するので例外処理
     try:
-        # 押されたキーが q なら...
         if key.char == 'q':
-            # リスナーを停止する
             print("exiting...")
             return False
         elif key.char == 'o':
@@ -81,16 +80,15 @@ def on_press(key):
         pass
 
 def main():
-    # print("waiting before start...")
-    # time.sleep(10)
+    print("? press q to exit")
+    print("? press o to toggle mouse tracking / fixing")
     
-    print("start mouse listener")
-    print("press q to exit")
-    print("press o to toggle mouse listener")
+    print("----")
 
+    # マウス移動監視の開始
     mouse_tracker.start()
 
-    # キーボードコントローラを作成
+    # キー入力監視の開始
     keyboard_listener = KeyboardListener(on_press=on_press)
     keyboard_listener.start()
 
