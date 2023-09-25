@@ -8,7 +8,7 @@
 
 ## 使い方
 ```
-$ pip install pynput
+$ pip install -r requirements.txt
 $ python convert.py
 ```
 

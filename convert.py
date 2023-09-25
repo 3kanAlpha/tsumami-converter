@@ -4,8 +4,8 @@ from pynput.keyboard import Listener as KeyboardListener
 
 import time, threading
 
-# 1秒に何回マウス移動の追跡を行うか 30は仮
-TRACK_PER_SECOND = 30
+# 1秒に何回マウス移動の追跡を行うか
+TRACK_PER_SECOND = 40
 ONE_FRAME_TIME = 1 / TRACK_PER_SECOND
 TSUMAMI_L_LEFT = 's'
 TSUMAMI_L_RIGHT = 'a'
@@ -84,6 +84,8 @@ def main():
     print("? press o to toggle mouse tracking / fixing")
     
     print("----")
+    
+    print("! mouse tracking rate is set to {}".format(TRACK_PER_SECOND))
 
     # マウス移動監視の開始
     mouse_tracker.start()
